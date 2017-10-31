@@ -1,8 +1,9 @@
 "use strict";
-const express = require('express');
-const logger = require('morgan');
-const bodyParser = require('body-parser');
-const HeroRouter_1 = require('./routes/HeroRouter');
+Object.defineProperty(exports, "__esModule", { value: true });
+const express = require("express");
+const logger = require("morgan");
+const bodyParser = require("body-parser");
+const HeroRouter_1 = require("./routes/HeroRouter");
 // Creates and configures an ExpressJS web server.
 class App {
     //Run configuration methods on the Express instance.
@@ -33,5 +34,4 @@ class App {
         this.express.use('/api/v1/heroes', HeroRouter_1.default);
     }
 }
-Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = new App().express;

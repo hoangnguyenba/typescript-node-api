@@ -1,5 +1,6 @@
 "use strict";
-const express_1 = require('express');
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
 const Heroes = require('../data');
 class HeroRouter {
     /**
@@ -50,5 +51,4 @@ exports.HeroRouter = HeroRouter;
 // Create the HeroRouter, and export its configured Express.Router
 const heroRoutes = new HeroRouter();
 heroRoutes.init();
-Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = heroRoutes.router;
