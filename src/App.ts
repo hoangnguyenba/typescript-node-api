@@ -2,8 +2,9 @@ import * as path from 'path';
 import * as express from 'express';
 import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
+import * as mongoose from 'mongoose';
 
-import HeroRouter from './routes/HeroRouter';
+import HeroRouter from './routes/v1/HeroRouter';
 
 // Creates and configures an ExpressJS web server.
 class App {
@@ -13,6 +14,10 @@ class App {
 
 	//Run configuration methods on the Express instance.
 	constructor() {
+
+		const MONGODB_CONNECTION: string = "mongodb://localhost:27017/tavi";
+		let connection: mongoose.Connection = mongoose.createConnection(MONGODB_CONNECTION);
+
 		this.express = express();
 		this.middleware();
 		this.routes();

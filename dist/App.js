@@ -3,11 +3,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const logger = require("morgan");
 const bodyParser = require("body-parser");
-const HeroRouter_1 = require("./routes/HeroRouter");
+const mongoose = require("mongoose");
+const HeroRouter_1 = require("./routes/v1/HeroRouter");
 // Creates and configures an ExpressJS web server.
 class App {
     //Run configuration methods on the Express instance.
     constructor() {
+        const MONGODB_CONNECTION = "mongodb://localhost:27017/tavi";
+        let connection = mongoose.createConnection(MONGODB_CONNECTION);
         this.express = express();
         this.middleware();
         this.routes();

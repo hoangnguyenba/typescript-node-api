@@ -1,0 +1,15 @@
+version: '3'
+services:
+ mongodb_server:
+    container_name: mongodb_server
+    image: mongo
+    # env_file: './dev.env'
+    # command:
+    #     - '--auth'
+    #     - '-f'
+    #     - '/etc/mongo.conf'
+    # volumes:
+    #     - '/home/sa/data/mongod.conf:/etc/mongod.conf'
+    #     - '/home/sa/data/db:/data/db'
+    ports:
+        - '27017:27017'

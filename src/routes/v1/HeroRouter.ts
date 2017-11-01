@@ -1,6 +1,6 @@
 import {Router, Request, Response, NextFunction} from 'express';
 import { BaseRouter } from './BaseRouter';
-const Heroes = require('../data');
+const Heroes = require('../../data');
 
 export class HeroRouter extends BaseRouter {
     router: Router
