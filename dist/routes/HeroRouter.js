@@ -1,25 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = require("express");
+const BaseRouter_1 = require("./BaseRouter");
 const Heroes = require('../data');
-class HeroRouter {
-    /**
-     * Initialize the HeroRouter
-     */
-    constructor() {
-        this.router = express_1.Router();
-        this.init();
-    }
+class HeroRouter extends BaseRouter_1.BaseRouter {
     /**
      * GET all Heroes.
      */
-    getAll(req, res, next) {
+    readAll(req, res, next) {
         res.send(Heroes);
     }
     /**
      * GET one hero by id
      */
-    getOne(req, res, next) {
+    read(req, res, next) {
         let query = parseInt(req.params.id);
         let hero = Heroes.find(hero => hero.id === query);
         if (hero) {
@@ -38,17 +31,8 @@ class HeroRouter {
             });
         }
     }
-    /**
-     * Take each handler, and attach to one of the Express.Router's
-     * endpoints.
-     */
-    init() {
-        this.router.get('/', this.getAll);
-        this.router.get('/:id', this.getOne);
-    }
 }
 exports.HeroRouter = HeroRouter;
 // Create the HeroRouter, and export its configured Express.Router
 const heroRoutes = new HeroRouter();
-heroRoutes.init();
 exports.default = heroRoutes.router;

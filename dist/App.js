@@ -11,6 +11,15 @@ class App {
         this.express = express();
         this.middleware();
         this.routes();
+        //error handling
+        // this.app.use(errorHandler());
+        this.express.use((err, req, res, next) => {
+            res.status(400).json({
+                code: err.code,
+                message: err.name,
+                errors: err.message
+            });
+        });
     }
     // Configure Express middleware.
     middleware() {
@@ -21,17 +30,17 @@ class App {
     // Configure API endpoints.
     routes() {
         /* This is just to get up and running, and to make sure what we've got is
-         * working so far. This function will change when we start to add more
-         * API endpoints */
+        * working so far. This function will change when we start to add more
+        * API endpoints */
         let router = express.Router();
         // placeholder route handler
         router.get('/', (req, res, next) => {
             res.json({
-                message: 'Hello World!'
+                message: 'Tavi Api is working'
             });
         });
         this.express.use('/', router);
-        this.express.use('/api/v1/heroes', HeroRouter_1.default);
+        this.express.use('/v1/heroes', HeroRouter_1.default);
     }
 }
 exports.default = new App().express;
