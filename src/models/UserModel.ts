@@ -1,26 +1,121 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, SchemaType } from 'mongoose';
 
 let UserSchema: Schema = new Schema({
-    firstname: {
-        type: String,
-        default: '',
-        required: true
-    },
-    lastname: {
-        type: String,
-        default: '',
-        required: true
-    },
     email: {
         type: String,
-        default: '',
-        required: true
+        required: true,
+        unique: true
     },
     password: {
         type: String,
-        default: '',
+        required: true,
+        select: false
+    },
+    type: {
+        type: Number,
+        required: true,
+        enum: [1, 2, 3]
+    },
+    nickname: {
+        type: String,
+        required: true,
+    },
+    firstname: {
+        type: String,
+        required: true,
+    },
+    lastname: {
+        type: String,
         required: true
     },
+    sex: {
+        type: Number,
+        required: true,
+        enum: [0, 1]
+    },
+    birthday: {
+        type: Date,
+        required: true,
+    },
+    phone: {
+        type: String,
+        required: true,
+    },
+    language: {
+        type: String,
+        required: true,
+        enum: ['en', 'jp']
+    },
+    address: {
+        type: String,
+        required: true
+    },
+    job: {
+        type: String,
+        required: true
+    },
+    location: {
+        type: [Number],
+        validate: {
+            validator: (v) => {
+                return v.constructor === Array && v.length === 2;
+            },
+            message: '{VALUE} is not a valid location!'
+        }
+    },
+    is_online: {
+        type: Boolean
+    },
+    last_online: {
+        type: Date
+    },
+    start_time: {
+        type: Date
+    },
+    end_time: {
+        type: Date
+    },
+    rate: {
+        type: Number,
+        min: 1,
+        max: 5
+    },
+    optional_items: {
+        edu_background: String,
+        place_of_employment: String,
+        standard_time: String,
+        picture: String,
+        video: String,
+    },
+    identification: {
+        images: [String],
+        links: {
+            facebook_id: String,
+            google_id: String,
+            twitter_id: String,
+            instagram_id: String,
+            linkedin_id: String
+        },
+        selfie: String
+    },
+    // coordinator_bank_account: {
+    //     bank: String,
+    //     type: String,
+    //     branch_code: String,
+    //     account_number: String,
+    //     firstname: String,
+    //     lastname: String,
+    //     address: String,
+    //     birthday: Date
+    // },
+    followers: [String],
+    followings: [String],
+    device_token: String,
+    os: {
+        type: Number,
+        enum: [1, 2]
+    },
+    created_by: String,
     created_at: {
         type: Date,
         default: Date.now
@@ -29,8 +124,7 @@ let UserSchema: Schema = new Schema({
         type: Date,
         default: Date.now
     }
-});
-UserSchema.index({ "email": 1 }, { unique: true });
+})
 const User = model('User', UserSchema);
 
 export default User;
