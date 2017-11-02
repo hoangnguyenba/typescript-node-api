@@ -4,13 +4,13 @@ const express = require("express");
 const logger = require("morgan");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const HeroRouter_1 = require("./routes/v1/HeroRouter");
+const UserRouter_1 = require("./routes/v1/UserRouter");
 // Creates and configures an ExpressJS web server.
 class App {
     //Run configuration methods on the Express instance.
     constructor() {
         const MONGODB_CONNECTION = "mongodb://localhost:27017/tavi";
-        let connection = mongoose.createConnection(MONGODB_CONNECTION);
+        mongoose.connect(MONGODB_CONNECTION);
         this.express = express();
         this.middleware();
         this.routes();
@@ -43,7 +43,7 @@ class App {
             });
         });
         this.express.use('/', router);
-        this.express.use('/v1/heroes', HeroRouter_1.default);
+        this.express.use('/v1/users', UserRouter_1.default);
     }
 }
 exports.default = new App().express;

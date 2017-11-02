@@ -21,7 +21,7 @@ export class BaseRouter {
     /**
      * Read all
      */
-    public readAll(req: Request, res: Response, next: NextFunction) {
+    public list(req: Request, res: Response, next: NextFunction) {
         next(Error("Method not allow"));
     }
 
@@ -52,7 +52,7 @@ export class BaseRouter {
      */
     init() {
         this.router.post('/', this.create);
-        this.router.get('/', this.readAll);
+        this.router.get('/', this.list);
         this.router.get('/:id', this.read);
         this.router.put('/:id', this.update);
         this.router.delete('/:id', this.delete);

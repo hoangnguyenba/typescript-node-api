@@ -4,7 +4,7 @@ import * as logger from 'morgan';
 import * as bodyParser from 'body-parser';
 import * as mongoose from 'mongoose';
 
-import HeroRouter from './routes/v1/HeroRouter';
+import UserRouter from './routes/v1/UserRouter';
 
 // Creates and configures an ExpressJS web server.
 class App {
@@ -16,7 +16,7 @@ class App {
 	constructor() {
 
 		const MONGODB_CONNECTION: string = "mongodb://localhost:27017/tavi";
-		let connection: mongoose.Connection = mongoose.createConnection(MONGODB_CONNECTION);
+		mongoose.connect(MONGODB_CONNECTION);
 
 		this.express = express();
 		this.middleware();
@@ -53,7 +53,7 @@ class App {
 			});
 		});
 		this.express.use('/', router);
-		this.express.use('/v1/heroes', HeroRouter);
+		this.express.use('/v1/users', UserRouter);
 	}
 
 }
