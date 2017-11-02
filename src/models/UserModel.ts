@@ -1,5 +1,40 @@
 import { Schema, model, SchemaType } from 'mongoose';
 
+let BankAccountSchema: Schema = new Schema({
+    bank: {
+        type: String,
+        required: true,
+    },
+    type: {
+        type: String,
+        required: true,
+    },
+    branch_code: {
+        type: String,
+        required: true,
+    },
+    account_number: {
+        type: String,
+        required: true,
+    },
+    firstname: {
+        type: String,
+        required: true,
+    },
+    lastname: {
+        type: String,
+        required: true,
+    },
+    address: {
+        type: String,
+        required: true,
+    },
+    birthday: {
+        type: Date,
+        required: true,
+    }
+});
+
 let UserSchema: Schema = new Schema({
     email: {
         type: String,
@@ -98,16 +133,9 @@ let UserSchema: Schema = new Schema({
         },
         selfie: String
     },
-    // coordinator_bank_account: {
-    //     bank: String,
-    //     type: String,
-    //     branch_code: String,
-    //     account_number: String,
-    //     firstname: String,
-    //     lastname: String,
-    //     address: String,
-    //     birthday: Date
-    // },
+    coordinator_bank_account: {
+        type: BankAccountSchema
+    },
     followers: [String],
     followings: [String],
     device_token: String,
