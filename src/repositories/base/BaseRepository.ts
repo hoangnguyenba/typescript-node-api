@@ -3,7 +3,7 @@ import IWrite = require("./../interfaces/base/Write");
 
 import mongoose = require("mongoose");
 
-export default class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T> {
+export default class BaseRepository<T extends mongoose.Document> implements IRead<T>, IWrite<T> {
     
     private _model: mongoose.Model<mongoose.Document>;
     
@@ -15,9 +15,8 @@ export default class RepositoryBase<T extends mongoose.Document> implements IRea
         this._model.create(item, callback);
     }
     
-    retrieve (callback: (error: any, result: any) => void) {
-        console.log("go here ???");
-        this._model.find({}, callback)
+    list (conditions = {}, callback: (error: any, result: any) => void) {
+        this._model.find(conditions, callback)
     }
     
     update (_id: mongoose.Types.ObjectId, item: T, callback: (error: any, result: any) => void) {

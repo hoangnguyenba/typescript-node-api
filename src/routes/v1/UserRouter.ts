@@ -12,9 +12,7 @@ export class UserRouter extends BaseRouter {
      */
     public list(req: Request, res: Response, next: NextFunction) {
 		let userRepository = new UserRepository();
-		userRepository.retrieve((err, users) => {
-			console.log(err);
-			console.log(users);
+		userRepository.list({}, (err, users) => {
 			res.send(users);
 		})
     }
@@ -23,23 +21,10 @@ export class UserRouter extends BaseRouter {
      * GET one hero by id
      */
     public read(req: Request, res: Response, next: NextFunction) {
-        let query = parseInt(req.params.id);
-        let hero = Users.find(hero => hero.id === query);
-        if (hero) {
-            res.status(200)
-              .send({
-                message: 'Success',
-                status: res.status,
-                hero
-              });
-        }
-        else {
-            res.status(404)
-              .send({
-                message: 'No hero found with the given id.',
-                status: res.status
-              });
-        }
+        let userRepository = new UserRepository();
+		userRepository.findById(req.params.id,(err, user) => {
+			res.send(user);
+		})
 	}
 	
 	/**
@@ -48,10 +33,7 @@ export class UserRouter extends BaseRouter {
     public create(req: Request, res: Response, next: NextFunction) {
 		let userRepository = new UserRepository();
 		var user: IUser = <IUser>req.body;
-		console.log(user);
 		userRepository.create(user,(err, data) => {
-			console.log(err);
-			console.log(data);
 			res.send(data);
 		})
     }
