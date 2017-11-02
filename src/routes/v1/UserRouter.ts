@@ -34,10 +34,23 @@ export class UserRouter extends BaseRouter {
 		let userRepository = new UserRepository();
 		var user: IUser = <IUser>req.body;
 		userRepository.create(user,(err, data) => {
+			if(err)
+				res.send(err);
+			else
+				res.send(data);
+		})
+	}
+	
+	/**
+     * update
+     */
+    public update(req: Request, res: Response, next: NextFunction) {
+		let userRepository = new UserRepository();
+		var user: IUser = <IUser>req.body;
+		userRepository.update(req.params.id, user, (err, data) => {
 			res.send(data);
 		})
     }
-
 }
 
 // Create the HeroRouter, and export its configured Express.Router

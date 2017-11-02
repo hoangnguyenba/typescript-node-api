@@ -30,7 +30,7 @@ let UserSchema: Schema = new Schema({
         default: Date.now
     }
 });
-
+UserSchema.index({ "email": 1 }, { unique: true });
 const User = model('User', UserSchema);
 
 export default User;
